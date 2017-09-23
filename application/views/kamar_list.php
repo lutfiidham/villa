@@ -5,35 +5,43 @@
             <div class='col-xs-12'>
               <div class='box'>
                 <div class='box-header'>
-                  <h3 class='box-title'> DAFTAR CHANNEL <?php echo anchor('channel/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
+                  <h3 class='box-title'> DAFTAR KAMAR <?php echo anchor('kamar/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
                 </div><!-- /.box-header -->
                 <div class='box-body'>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
-                    <th width="80px">No</th>
-		    <th>Id Channel</th>
-		    <th>Nama Channel</th>
+                    <th width="20px">No</th>
+		    <th>Id Kamar</th>
+		    <th>Nama Kamar</th>
+		    <th>No Kamar</th>
+		    <th>Kapasitas</th>
+		    <th>Status Kamar</th>
+		    <th>Harga Kamar</th>
 		    <th>Action</th>
                 </tr>
             </thead>
 	    <tbody>
             <?php
             $start = 0;
-            foreach ($channel_data as $channel)
+            foreach ($kamar_data as $kamar)
             {
                 ?>
                 <tr>
 		    <td><?php echo ++$start ?></td>
-		    <td><?php echo $channel->id_channel ?></td>
-		    <td><?php echo $channel->nama_channel ?></td>
+		    <td><?php echo $kamar->id_kamar ?></td>
+		    <td><?php echo $kamar->nama_kamar ?></td>
+		    <td><?php echo $kamar->no_kamar ?></td>
+		    <td><?php echo $kamar->kapasitas ?></td>
+		    <td><?php echo $kamar->status_kamar ?></td>
+		    <td><?php echo $kamar->harga_kamar ?></td>
 		    <td style="text-align:center" width="140px">
 			<?php 
-			echo anchor(site_url('channel/read/'.$channel->id_channel),'<i class="fa fa-eye"></i>',array('title'=>'detail','class'=>'btn btn-danger btn-sm')); 
+			echo anchor(site_url('kamar/read/'.$kamar->id_kamar),'<i class="fa fa-eye"></i>',array('title'=>'detail','class'=>'btn btn-danger btn-sm')); 
 			echo '  '; 
-			echo anchor(site_url('channel/update/'.$channel->id_channel),'<i class="fa fa-pencil-square-o"></i>',array('title'=>'edit','class'=>'btn btn-danger btn-sm')); 
+			echo anchor(site_url('kamar/update/'.$kamar->id_kamar),'<i class="fa fa-pencil-square-o"></i>',array('title'=>'edit','class'=>'btn btn-danger btn-sm')); 
 			echo '  '; 
-			echo anchor(site_url('channel/delete/'.$channel->id_channel),'<i class="fa fa-trash-o"></i>','title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+			echo anchor(site_url('kamar/delete/'.$kamar->id_kamar),'<i class="fa fa-trash-o"></i>','title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 			?>
 		    </td>
 	        </tr>

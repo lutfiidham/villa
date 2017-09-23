@@ -5,35 +5,35 @@
             <div class='col-xs-12'>
               <div class='box'>
                 <div class='box-header'>
-                  <h3 class='box-title'> DAFTAR CHANNEL <?php echo anchor('channel/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
+                  <h3 class='box-title'> DAFTAR STATUS_PEMESANAN <?php echo anchor('status_pemesanan/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
                 </div><!-- /.box-header -->
                 <div class='box-body'>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
-                    <th width="80px">No</th>
-		    <th>Id Channel</th>
-		    <th>Nama Channel</th>
+                    <th width="25px">No</th>
+		    <th>Id Status Pemesanan</th>
+		    <th>Nama Status Pemesanan</th>
 		    <th>Action</th>
                 </tr>
             </thead>
 	    <tbody>
             <?php
             $start = 0;
-            foreach ($channel_data as $channel)
+            foreach ($status_pemesanan_data as $status_pemesanan)
             {
                 ?>
                 <tr>
 		    <td><?php echo ++$start ?></td>
-		    <td><?php echo $channel->id_channel ?></td>
-		    <td><?php echo $channel->nama_channel ?></td>
+		    <td><?php echo $status_pemesanan->id_status_pemesanan ?></td>
+		    <td><?php echo $status_pemesanan->nama_status_pemesanan ?></td>
 		    <td style="text-align:center" width="140px">
 			<?php 
-			echo anchor(site_url('channel/read/'.$channel->id_channel),'<i class="fa fa-eye"></i>',array('title'=>'detail','class'=>'btn btn-danger btn-sm')); 
+			echo anchor(site_url('status_pemesanan/read/'.$status_pemesanan->id_status_pemesanan),'<i class="fa fa-eye"></i>',array('title'=>'detail','class'=>'btn btn-danger btn-sm')); 
 			echo '  '; 
-			echo anchor(site_url('channel/update/'.$channel->id_channel),'<i class="fa fa-pencil-square-o"></i>',array('title'=>'edit','class'=>'btn btn-danger btn-sm')); 
+			echo anchor(site_url('status_pemesanan/update/'.$status_pemesanan->id_status_pemesanan),'<i class="fa fa-pencil-square-o"></i>',array('title'=>'edit','class'=>'btn btn-danger btn-sm')); 
 			echo '  '; 
-			echo anchor(site_url('channel/delete/'.$channel->id_channel),'<i class="fa fa-trash-o"></i>','title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+			echo anchor(site_url('status_pemesanan/delete/'.$status_pemesanan->id_status_pemesanan),'<i class="fa fa-trash-o"></i>','title="delete" class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 			?>
 		    </td>
 	        </tr>

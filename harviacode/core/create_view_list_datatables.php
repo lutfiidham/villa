@@ -24,7 +24,7 @@ $string .= "</h3>
         <table class=\"table table-bordered table-striped\" id=\"mytable\">
             <thead>
                 <tr>
-                    <th width=\"80px\">No</th>";
+                    <th width=\"25px\">No</th>";
 foreach ($all as $row) {
     $string .= "\n\t\t    <th>" . label($row['column_name']) . "</th>";
 }

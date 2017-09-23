@@ -1,0 +1,155 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Promo extends CI_Controller
+{
+    
+        
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Promo_model');
+        $this->load->library('form_validation');
+    }
+
+    public function index()
+    {
+        $promo = $this->Promo_model->get_all();
+
+        $data = array(
+            'promo_data' => $promo
+        );
+
+        $this->template->load('template','promo_list', $data);
+    }
+
+    public function read($id) 
+    {
+        $row = $this->Promo_model->get_by_id($id);
+        if ($row) {
+            $data = array(
+		'id_promo' => $row->id_promo,
+		'promo_awal' => $row->promo_awal,
+		'promo_akhir' => $row->promo_akhir,
+		'diskon_promo' => $row->diskon_promo,
+		'ket__promo' => $row->ket__promo,
+	    );
+            $this->template->load('template','promo_read', $data);
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('promo'));
+        }
+    }
+
+    public function create() 
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('promo/create_action'),
+	    'id_promo' => set_value('id_promo'),
+	    'promo_awal' => set_value('promo_awal'),
+	    'promo_akhir' => set_value('promo_akhir'),
+	    'diskon_promo' => set_value('diskon_promo'),
+	    'ket__promo' => set_value('ket__promo'),
+	);
+        $this->template->load('template','promo_form', $data);
+    }
+    
+    public function create_action() 
+    {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->create();
+        } else {
+            $data = array(
+		'id_promo' => $this->input->post('id_promo',TRUE),
+		'promo_awal' => $this->input->post('promo_awal',TRUE),
+		'promo_akhir' => $this->input->post('promo_akhir',TRUE),
+		'diskon_promo' => $this->input->post('diskon_promo',TRUE),
+		'ket__promo' => $this->input->post('ket__promo',TRUE),
+	    );
+
+            $this->Promo_model->insert($data);
+            $this->session->set_flashdata('message', 'Create Record Success');
+            redirect(site_url('promo'));
+        }
+    }
+    
+    public function update($id) 
+    {
+        $row = $this->Promo_model->get_by_id($id);
+
+        if ($row) {
+            $data = array(
+                'button' => 'Update',
+                'action' => site_url('promo/update_action'),
+		'id_promo' => set_value('id_promo', $row->id_promo),
+		'promo_awal' => set_value('promo_awal', $row->promo_awal),
+		'promo_akhir' => set_value('promo_akhir', $row->promo_akhir),
+		'diskon_promo' => set_value('diskon_promo', $row->diskon_promo),
+		'ket__promo' => set_value('ket__promo', $row->ket__promo),
+	    );
+            $this->template->load('template','promo_form', $data);
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('promo'));
+        }
+    }
+    
+    public function update_action() 
+    {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->update($this->input->post('id_promo', TRUE));
+        } else {
+            $data = array(
+		'id_promo' => $this->input->post('id_promo',TRUE),
+		'promo_awal' => $this->input->post('promo_awal',TRUE),
+		'promo_akhir' => $this->input->post('promo_akhir',TRUE),
+		'diskon_promo' => $this->input->post('diskon_promo',TRUE),
+		'ket__promo' => $this->input->post('ket__promo',TRUE),
+	    );
+
+            $this->Promo_model->update($this->input->post('id_promo', TRUE), $data);
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('promo'));
+        }
+    }
+    
+    public function delete($id) 
+    {
+        $row = $this->Promo_model->get_by_id($id);
+
+        if ($row) {
+            $this->Promo_model->delete($id);
+            $this->session->set_flashdata('message', 'Delete Record Success');
+            redirect(site_url('promo'));
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
+            redirect(site_url('promo'));
+        }
+    }
+
+    public function _rules() 
+    {
+	$this->form_validation->set_rules('id_promo', 'id promo', 'trim|required');
+	$this->form_validation->set_rules('promo_awal', 'promo awal', 'trim|required');
+	$this->form_validation->set_rules('promo_akhir', 'promo akhir', 'trim|required');
+	$this->form_validation->set_rules('diskon_promo', 'diskon promo', 'trim|required');
+	$this->form_validation->set_rules('ket__promo', 'ket  promo', 'trim|required');
+
+	$this->form_validation->set_rules('id_promo', 'id_promo', 'trim');
+	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    }
+
+}
+
+/* End of file Promo.php */
+/* Location: ./application/controllers/Promo.php */
+/* Please DO NOT modify this information : */
+/* Generated by Harviacode Codeigniter CRUD Generator 2017-09-23 08:19:22 */
+/* http://harviacode.com */
