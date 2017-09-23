@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2017 at 04:41 AM
+-- Generation Time: Sep 23, 2017 at 06:29 PM
 -- Server version: 5.6.36
 -- PHP Version: 7.1.2
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `channel` (
 --
 
 INSERT INTO `channel` (`id_channel`, `nama_channel`) VALUES
-('1', 'Travelok');
+('CH-0001', 'Traveloka');
 
 -- --------------------------------------------------------
 
@@ -129,6 +129,14 @@ CREATE TABLE IF NOT EXISTS `jabatan` (
   `nama_jabatan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `jabatan`
+--
+
+INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
+('JA-0001', 'Magang'),
+('JA-0002', 'Tukang');
+
 -- --------------------------------------------------------
 
 --
@@ -143,6 +151,13 @@ CREATE TABLE IF NOT EXISTS `kamar` (
   `status_kamar` varchar(10) DEFAULT NULL,
   `harga_kamar` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kamar`
+--
+
+INSERT INTO `kamar` (`id_kamar`, `nama_kamar`, `no_kamar`, `kapasitas`, `status_kamar`, `harga_kamar`) VALUES
+('KA-0001', 'Melati', 1, 4, 'free', 500000);
 
 -- --------------------------------------------------------
 
@@ -183,16 +198,24 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `icon` varchar(30) NOT NULL,
   `is_active` int(1) NOT NULL,
   `is_parent` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menu`
 --
 
 INSERT INTO `menu` (`id`, `name`, `link`, `icon`, `is_active`, `is_parent`) VALUES
-(15, 'menu management', 'menu', 'fa fa-list-alt', 1, 0),
-(16, 'data siswa', 'siswa', 'fa fa-graduation-cap', 1, 0),
-(17, 'data jurusan', 'jurusan', 'fa fa-list-alt', 1, 0);
+(20, 'Master', '#', 'fa fa-bars', 1, 0),
+(21, 'Pegawai', 'pegawai', 'fa fa-group', 1, 20),
+(22, 'Jabatan', 'jabatan', 'fa fa-credit-card', 1, 20),
+(23, 'Promo', 'promo', 'fa fa-list', 1, 20),
+(24, 'Kamar', 'kamar', 'fa fa-bed', 1, 20),
+(25, 'Layanan', 'layanan', 'fa fa-list', 1, 20),
+(26, 'Status Pemesanan', 'status_pemesanan', 'fa fa-list', 1, 20),
+(27, 'Inventori', 'inventori', 'fa fa-list', 1, 20),
+(28, 'Detail Inventori', 'detail_inventori', 'fa fa-list', 1, 20),
+(29, 'Ketentuan Waktu', 'ketentuan_waktu', 'fa fa-clock-o', 1, 20),
+(30, 'Channel', 'channel', 'fa fa-plane', 1, 20);
 
 -- --------------------------------------------------------
 
@@ -208,6 +231,13 @@ CREATE TABLE IF NOT EXISTS `pegawai` (
   `telp_pegawai` varchar(15) DEFAULT NULL,
   `password_pegawai` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pegawai`
+--
+
+INSERT INTO `pegawai` (`id_pegawai`, `id_jabatan`, `nama_pegawai`, `alamat_pegawai`, `telp_pegawai`, `password_pegawai`) VALUES
+('PE-0001', 'JA-0002', 'Idham', 'Jauh', '081', '123');
 
 -- --------------------------------------------------------
 
@@ -255,8 +285,8 @@ CREATE TABLE IF NOT EXISTS `promo` (
 --
 
 CREATE TABLE IF NOT EXISTS `status_pemesanan` (
-  `id_status_pemesana` varchar(10) NOT NULL,
-  `nama_status_pemesa` varchar(20) DEFAULT NULL
+  `id_status_pemesanan` varchar(10) NOT NULL,
+  `nama_status_pemesanan` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -389,7 +419,7 @@ ALTER TABLE `promo`
 -- Indexes for table `status_pemesanan`
 --
 ALTER TABLE `status_pemesanan`
-  ADD PRIMARY KEY (`id_status_pemesana`);
+  ADD PRIMARY KEY (`id_status_pemesanan`);
 
 --
 -- Indexes for table `tamu`
@@ -405,7 +435,7 @@ ALTER TABLE `tamu`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
 --
 -- Constraints for dumped tables
 --
@@ -459,7 +489,7 @@ ALTER TABLE `pemesanan`
   ADD CONSTRAINT `fk_melakukan4` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`),
   ADD CONSTRAINT `fk_menggunakan2` FOREIGN KEY (`id_promo`) REFERENCES `promo` (`id_promo`),
   ADD CONSTRAINT `fk_sewa` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`),
-  ADD CONSTRAINT `fk_status_pesan` FOREIGN KEY (`id_status_pemesana`) REFERENCES `status_pemesanan` (`id_status_pemesana`),
+  ADD CONSTRAINT `fk_status_pesan` FOREIGN KEY (`id_status_pemesana`) REFERENCES `status_pemesanan` (`id_status_pemesanan`),
   ADD CONSTRAINT `fk_via` FOREIGN KEY (`id_channel`) REFERENCES `channel` (`id_channel`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
