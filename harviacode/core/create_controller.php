@@ -100,7 +100,7 @@ $string .= "\n\t);
             \$this->create();
         } else {
             \$data = array(";
-foreach ($non_pk as $row) {
+foreach ($all as $row) {
     $string .= "\n\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
 }
 $string .= "\n\t    );
@@ -138,7 +138,7 @@ $string .= "\n\t    );
             \$this->update(\$this->input->post('$pk', TRUE));
         } else {
             \$data = array(";
-foreach ($non_pk as $row) {
+foreach ($all as $row) {
     $string .= "\n\t\t'" . $row['column_name'] . "' => \$this->input->post('" . $row['column_name'] . "',TRUE),";
 }    
 $string .= "\n\t    );
@@ -165,7 +165,7 @@ $string .= "\n\t    );
 
     public function _rules() 
     {";
-foreach ($non_pk as $row) {
+foreach ($all as $row) {
     $int = $row3['data_type'] == 'int' || $row['data_type'] == 'double' || $row['data_type'] == 'decimal' ? '|numeric' : '';
     $string .= "\n\t\$this->form_validation->set_rules('".$row['column_name']."', '".  strtolower(label($row['column_name']))."', 'trim|required$int');";
 }    
@@ -196,7 +196,7 @@ if ($export_excel == '1') {
 
         \$kolomhead = 0;
         xlsWriteLabel(\$tablehead, \$kolomhead++, \"No\");";
-foreach ($non_pk as $row) {
+foreach ($all as $row) {
         $column_name = label($row['column_name']);
         $string .= "\n\txlsWriteLabel(\$tablehead, \$kolomhead++, \"$column_name\");";
 }
@@ -205,7 +205,7 @@ $string .= "\n\n\tforeach (\$this->" . $m . "->get_all() as \$data) {
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber(\$tablebody, \$kolombody++, \$nourut);";
-foreach ($non_pk as $row) {
+foreach ($all as $row) {
         $column_name = $row['column_name'];
         $xlsWrite = $row['data_type'] == 'int' || $row['data_type'] == 'double' || $row['data_type'] == 'decimal' ? 'xlsWriteNumber' : 'xlsWriteLabel';
         $string .= "\n\t    " . $xlsWrite . "(\$tablebody, \$kolombody++, \$data->$column_name);";

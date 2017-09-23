@@ -12,6 +12,17 @@ $string = "<!-- Main content -->
 $string .= "
         <form action=\"<?php echo \$action; ?>\" method=\"post\">";
 $string .="<table class='table table-bordered'>";
+if ($pk) {
+  $string .= "\n\t    <tr><td>". label($pk) . " <?php echo form_error('" . $pk . "') ?></td>
+            <td><input readonly type=\"text\" class=\"form-control\" name=\"$pk" . "\" id=\"" . $pk . "\" placeholder=\"" . label($pk) . "\" value=\"<?php 
+            if (\$button == \"Create\") {
+              echo gen_id(\"".substr($table_name, 0, 2)."\", \"".$table_name."\", \"" . $pk . "\", \"4\", \"4\");
+            }else{
+              echo $" . $pk . ";
+            }
+             ?>\" />
+        </td>";
+}
 foreach ($non_pk as $row) {
     if ($row["data_type"] == 'text') {
         $string .= "\n\t    <tr><td>". label($row["column_name"]) . " <?php echo form_error('" . $row["column_name"] . "') ?></td>
@@ -23,7 +34,7 @@ foreach ($non_pk as $row) {
         </td>";
     }
 }
-$string .= "\n\t    <input type=\"hidden\" name=\"" . $pk . "\" value=\"<?php echo $" . $pk . "; ?>\" /> ";
+
 $string .= "\n\t    <tr><td colspan='2'><button type=\"submit\" class=\"btn btn-primary\"><?php echo \$button ?></button> ";
 $string .= "\n\t    <a href=\"<?php echo site_url('" . $c_url . "') ?>\" class=\"btn btn-default\">Cancel</a></td></tr>";
 $string .= "\n\t

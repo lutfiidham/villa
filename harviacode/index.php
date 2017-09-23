@@ -41,16 +41,16 @@ require_once 'core/process.php';
                             <?php $jenis_tabel = isset($_POST['jenis_tabel']) ? $_POST['jenis_tabel'] : 'reguler_table'; ?>
                             <div class="col-md-6">
                                 <div class="radio" style="margin-bottom: 0px; margin-top: 0px">
-                                    <label>
+                                    <!-- <label>
                                         <input type="radio" name="jenis_tabel" value="reguler_table" <?php echo $jenis_tabel == 'reguler_table' ? 'checked' : ''; ?>>
                                         Reguler Table
-                                    </label>
+                                    </label> -->
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="radio" style="margin-bottom: 0px; margin-top: 0px">
                                     <label>
-                                        <input type="radio" name="jenis_tabel" value="datatables" <?php echo $jenis_tabel == 'datatables' ? 'checked' : ''; ?>>
+                                        <input type="radio" name="jenis_tabel" value="datatables" checked="">
                                         Datatables
                                     </label>
                                 </div>
