@@ -22,6 +22,8 @@
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo base_url() ?>template/dist/css/skins/_all-skins.min.css">
 
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/daterange/daterangepicker.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -200,8 +202,10 @@
 
         <!-- jQuery 2.1.4 -->
         <script src="<?php echo base_url() ?>template/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        
         <!-- Bootstrap 3.3.5 -->
         <script src="<?php echo base_url() ?>template/bootstrap/js/bootstrap.min.js"></script>
+     
         <!-- DataTables -->
         <script src="<?php echo base_url() ?>template/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="<?php echo base_url() ?>template/plugins/datatables/dataTables.bootstrap.min.js"></script>
@@ -214,6 +218,9 @@
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo base_url() ?>template/dist/js/demo.js"></script>
         <!-- page script -->
+
+     <script src="<?php echo base_url() ?>assets/daterange/daterangepicker.js"></script>
+
         <script>
             $(function () {
                 $("#example1").DataTable();

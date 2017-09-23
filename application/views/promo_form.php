@@ -1,4 +1,5 @@
 <!-- Main content -->
+
         <section class='content'>
           <div class='row'>
             <div class='col-xs-12'>
@@ -38,3 +39,17 @@
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->
+
+
+
+<script>
+
+$("input").daterangepicker({
+  minDate: moment().subtract(2, 'years')
+}, function (startDate, endDate, period) {
+  $(this).val(startDate.format('L') + ' – ' + endDate.format('L'))
+});
+  
+
+
+</script>
