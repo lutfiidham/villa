@@ -159,7 +159,12 @@
                             
                         }
                         ?>
-
+                        <li>
+                            <a href="">
+                                <i class="fa fa-tasks"></i> <span>BOOKING</span>
+                                <small class="label pull-right bg-red"></small>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
