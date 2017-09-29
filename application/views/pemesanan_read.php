@@ -5,14 +5,17 @@
             <div class='col-xs-12'>
               <div class='box'>
                 <div class='box-header'>
-                <h3 class='box-title'>Pegawai Read</h3>
+                <h3 class='box-title'>Pemesanan Read</h3>
         <table class="table table-bordered">
-	    <tr><td>Id Jabatan</td><td><?php echo $id_jabatan; ?></td></tr>
-	    <tr><td>Nama Pegawai</td><td><?php echo $nama_pegawai; ?></td></tr>
-	    <tr><td>Alamat Pegawai</td><td><?php echo $alamat_pegawai; ?></td></tr>
-	    <tr><td>Telp Pegawai</td><td><?php echo $telp_pegawai; ?></td></tr>
-	    <tr><td>Password Pegawai</td><td><?php echo $password_pegawai; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('pegawai') ?>" class="btn btn-default">Cancel</a></td></tr>
+	    <tr><td>Id Pemesanan</td><td><?php echo $id_pemesanan; ?></td></tr>
+	    <tr><td>Kamar</td><td><?php echo $kamar; ?></td></tr>
+	    <tr><td>Harga</td><td><?php echo $total_harga; ?></td></tr>
+	    <tr><td>Tamu</td><td><?php echo $tamu; ?></td></tr>
+	    <tr><td>Dewasa</td><td><?php echo $jumlah_dewasa; ?></td></tr>
+	    <tr><td>Anak</td><td><?php echo $anak; ?></td></tr>
+	    <tr><td>Permintaan Spesial</td><td><?php echo $permintaan_spesial; ?></td></tr>
+	    <tr><td>Status Pemesanan</td><td><?php echo $nama_status_pemesanan; ?></td></tr>
+	    <tr><td></td><td><a href="<?php echo site_url('pemesanan') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </div><!-- /.box-body -->
               </div><!-- /.box -->
