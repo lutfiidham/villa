@@ -25,7 +25,12 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/daterange/daterangepicker.css">
 
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2.min.css">
-
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2-bootstrap.css">
+        <style type="text/css">
+            [class^='select2'] {
+              border-radius: 0px !important;
+            }
+        </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -232,8 +237,8 @@
 
         <script>
             $(document).ready(function() {
-                $('.js-example-basic-single').select2({
-                    maximumSelectionLength: 3
+                $('select').select2({
+                    width: '100%'
                 });
             });
 

@@ -20,6 +20,16 @@ class Pemesanan_model extends CI_Model
         return $q; 
     }
 
+    function get_tamu(){
+        $q = $this->db->query("select id_tamu, concat(nama_depan_tamu,' ',nama_belakang_tamu) as tamu from tamu");
+        return $q; 
+    }
+
+    function get_promo(){
+        $q = $this->db->query("select id_promo, concat(nama_promo,' ',diskon_promo) as promo from promo where curdate() between promo_awal and promo_akhir");
+        return $q; 
+    }
+
     // get all
     function get_all()
     {

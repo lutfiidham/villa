@@ -5,7 +5,6 @@ if (!defined('BASEPATH'))
 
 class Pemesanan extends CI_Controller
 {
-    
         
     function __construct()
     {
