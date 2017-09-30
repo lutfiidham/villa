@@ -26,7 +26,7 @@
                 </td></tr>
 
             <tr><td>Kamar <?php echo form_error('id_kamar') ?></td>
-                <td><?php echo cmb_select2('id_kamar','kamar', 'no_kamar,-,nama_kamar','id_kamar','id_kamar') ?>
+                <td><?php echo cmb_kamar('id_kamar','id_kamar') ?>
                 </td></tr>
 
             <tr><td>Tamu <?php echo form_error('id_tamu') ?></td>

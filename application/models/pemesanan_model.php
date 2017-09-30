@@ -16,7 +16,8 @@ class Pemesanan_model extends CI_Model
     }
 
     function get_kamar(){
-        $this->db->query("select concat('no_kamar','-','nama_kamar') as kamar from kamar where status")
+        $q = $this->db->query("select id_kamar, concat(no_kamar,' - ',nama_kamar) as kamar from kamar where status_kamar = 'available' ");
+        return $q; 
     }
 
     // get all

@@ -12,14 +12,15 @@ function cmb_dinamis($name,$table,$field,$pk,$selected){
     return $cmb;  
 }
 
-function cmb_select2($name,$table,$field,$pk,$selected){
+function cmb_kamar($name,$selected){
     $ci = get_instance();
-    $cmb = "<select name='$name' class='form-control js-example-basic-single'>";
-    $data = $ci->db->get($table)->result();
+    $load = $ci->load->model('Pemesanan_model');
+    $cmb = "<select name='$name' class='js-example-basic-single form-control'>";
+    $data = $ci->Pemesanan_model->get_kamar()->result();
     foreach ($data as $d){
-        $cmb .="<option value='".$d->$pk."'";
-        $cmb .= $selected==$d->$pk?" selected='selected'":'';
-        $cmb .=">".  strtoupper($d->$field)."</option>";
+        $cmb .="<option value='".$d->id_kamar."'";
+        $cmb .= $selected==$d->id_kamar?" selected='selected'":'';
+        $cmb .=">".  strtoupper($d->kamar)."</option>";
     }
     $cmb .="</select>";
     return $cmb;
