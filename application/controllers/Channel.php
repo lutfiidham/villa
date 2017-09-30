@@ -124,7 +124,7 @@ class Channel extends CI_Controller
 	$this->form_validation->set_rules('id_channel', 'id channel', 'trim|required');
 	$this->form_validation->set_rules('nama_channel', 'nama channel', 'trim|required');
 
-	$this->form_validation->set_rules('id_channel', 'id_channel', 'trim');
+	// $this->form_validation->set_rules('id_channel', 'id_channel', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

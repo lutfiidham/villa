@@ -5,18 +5,18 @@
             <div class='col-xs-12'>
               <div class='box'>
                 <div class='box-header'>
-                  <h3 class='box-title'> DAFTAR KETENTUAN_WAKTU <?php echo anchor('ketentuan_waktu/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
+                  <h3 class='box-title'> DAFTAR KETENTUAN WAKTU <?php echo anchor('ketentuan_waktu/create/','Tambah',array('class'=>'btn btn-danger btn-sm'));?></h3>
                 </div><!-- /.box-header -->
                 <div class='box-body'>
         <table class="table table-bordered table-striped" id="mytable">
             <thead>
                 <tr>
                     <th width="80px">No</th>
-		    <th>Id Kw</th>
-		    <th>Toleransi Ci</th>
-		    <th>Toleransi Co</th>
-		    <th>Presentase Eci</th>
-		    <th>Presentase Lco</th>
+		    <th>Id KW</th>
+		    <th>Toleransi CI</th>
+		    <th>Toleransi CO</th>
+		    <th>Presentase ECI</th>
+		    <th>Presentase LCO</th>
 		    <th>Action</th>
                 </tr>
             </thead>
