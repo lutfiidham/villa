@@ -24,6 +24,8 @@
 
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/daterange/daterangepicker.css">
 
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2.min.css">
+
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -226,7 +228,15 @@
 
      <script src="<?php echo base_url() ?>assets/daterange/daterangepicker.js"></script>
 
+     <script src="<?php echo base_url() ?>assets/select2/select2.min.js"></script>
+
         <script>
+            $(document).ready(function() {
+                $('.js-example-basic-single').select2({
+                    maximumSelectionLength: 3
+                });
+            });
+
             $(function () {
                 $("#example1").DataTable();
                 $('#example2').DataTable({

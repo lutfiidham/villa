@@ -15,6 +15,10 @@ class Pemesanan_model extends CI_Model
         parent::__construct();
     }
 
+    function get_kamar(){
+        $this->db->query("select concat('no_kamar','-','nama_kamar') as kamar from kamar where status")
+    }
+
     // get all
     function get_all()
     {
