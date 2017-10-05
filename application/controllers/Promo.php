@@ -34,7 +34,7 @@ class Promo extends CI_Controller
 		'promo_awal' => $row->promo_awal,
 		'promo_akhir' => $row->promo_akhir,
 		'diskon_promo' => $row->diskon_promo,
-		'ket__promo' => $row->ket__promo,
+		'ket_promo' => $row->ket_promo,
 	    );
             $this->template->load('template','promo_read', $data);
         } else {
@@ -52,7 +52,7 @@ class Promo extends CI_Controller
 	    'promo_awal' => set_value('promo_awal'),
 	    'promo_akhir' => set_value('promo_akhir'),
 	    'diskon_promo' => set_value('diskon_promo'),
-	    'ket__promo' => set_value('ket__promo'),
+	    'ket_promo' => set_value('ket_promo'),
 	);
         $this->template->load('template','promo_form', $data);
     }
@@ -69,7 +69,7 @@ class Promo extends CI_Controller
 		'promo_awal' => $this->input->post('promo_awal',TRUE),
 		'promo_akhir' => $this->input->post('promo_akhir',TRUE),
 		'diskon_promo' => $this->input->post('diskon_promo',TRUE),
-		'ket__promo' => $this->input->post('ket__promo',TRUE),
+		'ket_promo' => $this->input->post('ket_promo',TRUE),
 	    );
 
             $this->Promo_model->insert($data);
@@ -90,7 +90,7 @@ class Promo extends CI_Controller
 		'promo_awal' => set_value('promo_awal', $row->promo_awal),
 		'promo_akhir' => set_value('promo_akhir', $row->promo_akhir),
 		'diskon_promo' => set_value('diskon_promo', $row->diskon_promo),
-		'ket__promo' => set_value('ket__promo', $row->ket__promo),
+		'ket_promo' => set_value('ket_promo', $row->ket_promo),
 	    );
             $this->template->load('template','promo_form', $data);
         } else {
@@ -111,7 +111,7 @@ class Promo extends CI_Controller
 		'promo_awal' => $this->input->post('promo_awal',TRUE),
 		'promo_akhir' => $this->input->post('promo_akhir',TRUE),
 		'diskon_promo' => $this->input->post('diskon_promo',TRUE),
-		'ket__promo' => $this->input->post('ket__promo',TRUE),
+		'ket_promo' => $this->input->post('ket_promo',TRUE),
 	    );
 
             $this->Promo_model->update($this->input->post('id_promo', TRUE), $data);
@@ -140,7 +140,7 @@ class Promo extends CI_Controller
 	$this->form_validation->set_rules('promo_awal', 'promo awal', 'trim|required');
 	$this->form_validation->set_rules('promo_akhir', 'promo akhir', 'trim|required');
 	$this->form_validation->set_rules('diskon_promo', 'diskon promo', 'trim|required');
-	$this->form_validation->set_rules('ket__promo', 'ket  promo', 'trim|required');
+	$this->form_validation->set_rules('ket_promo', 'ket  promo', 'trim|required');
 
 	$this->form_validation->set_rules('id_promo', 'id_promo', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

@@ -7,6 +7,8 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
+        <script src="<?php echo base_url() ?>template/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        
         <link rel="stylesheet" href="<?php echo base_url() ?>template/bootstrap/css/bootstrap.min.css">
         <!-- Font Awesome -->
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
@@ -26,11 +28,12 @@
 
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2-bootstrap.css">
-        <style type="text/css">
+        <link rel="stylesheet" href="<?php echo base_url() ?>assets/datepicker/bootstrap-datetimepicker.css">
+        <!--<style type="text/css">
             [class^='select2'] {
               border-radius: 0px !important;
             }
-        </style>
+        </style>-->
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -166,12 +169,7 @@
                             
                         }
                         ?>
-                        <li>
-                            <a href="">
-                                <i class="fa fa-tasks"></i> <span>BOOKING</span>
-                                <small class="label pull-right bg-red"></small>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -200,12 +198,12 @@
 
 
             </div><!-- /.content-wrapper -->
-            <footer class="main-footer">
+            <!-- <footer class="main-footer">
                 <div class="pull-right hidden-xs">
                     <b>Version</b> 2.3.0
                 </div>
                 <strong>Copyright &copy; 2017 <i>Liar</i></strong> All rights reserved.
-            </footer>
+            </footer> -->
 
             <!-- Add the sidebar's background. This div must be placed
                  immediately after the control sidebar -->
@@ -213,7 +211,7 @@
         </div><!-- ./wrapper -->
 
         <!-- jQuery 2.1.4 -->
-        <script src="<?php echo base_url() ?>template/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+        
         
         <!-- Bootstrap 3.3.5 -->
         <script src="<?php echo base_url() ?>template/bootstrap/js/bootstrap.min.js"></script>
@@ -231,7 +229,10 @@
         <script src="<?php echo base_url() ?>template/dist/js/demo.js"></script>
         <!-- page script -->
 
+     <script src="<?php echo base_url() ?>assets/datepicker/moment.js"></script>
+
      <script src="<?php echo base_url() ?>assets/daterange/daterangepicker.js"></script>
+     <script src="<?php echo base_url() ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
 
      <script src="<?php echo base_url() ?>assets/select2/select2.min.js"></script>
 
@@ -239,6 +240,10 @@
             $(document).ready(function() {
                 $('select').select2({
                     width: '100%'
+                });
+
+                $('#waktu_pemesanan').datetimepicker({
+                    
                 });
             });
 
@@ -252,6 +257,13 @@
                     "info": true,
                     "autoWidth": false
                 });
+
+                $('input[name="lama_menginap"]').daterangepicker({
+                    locale: {
+                      format: 'DD/MM/YYYY'
+                    }
+                });
+                
             });
         </script>
     </body>

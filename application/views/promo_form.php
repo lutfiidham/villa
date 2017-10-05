@@ -27,8 +27,8 @@
 	    <tr><td>Diskon Promo <?php echo form_error('diskon_promo') ?></td>
             <td><input type="text" class="form-control" name="diskon_promo" id="diskon_promo" placeholder="Diskon Promo" value="<?php echo $diskon_promo; ?>" />
         </td>
-	    <tr><td>Ket  Promo <?php echo form_error('ket__promo') ?></td>
-            <td><input type="text" class="form-control" name="ket__promo" id="ket__promo" placeholder="Ket  Promo" value="<?php echo $ket__promo; ?>" />
+	    <tr><td>Ket  Promo <?php echo form_error('ket_promo') ?></td>
+            <td><input type="text" class="form-control" name="ket_promo" id="ket_promo" placeholder="Ket  Promo" value="<?php echo $ket_promo; ?>" />
         </td>
 	    <tr><td colspan='2'><button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('promo') ?>" class="btn btn-default">Cancel</a></td></tr>
