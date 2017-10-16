@@ -19,8 +19,7 @@
 		   	<th>Kamar</th>
 		    <th>Harga</th>
 		    <th>Tamu</th>
-		    <th>Dewasa</th>
-		    <th>Anak</th>
+		    <th>Jumlah</th>
 		    <th>Permintaan Spesial</th>
 		    <th>Status Pemesanan</th>
 		    <th>Action</th>
@@ -37,9 +36,8 @@
 		    <td><?php echo $pemesanan->id_pemesanan ?></td>
 		    <td><?php echo $pemesanan->kamar ?></td>
 		    <td><?php echo $pemesanan->total_harga ?></td>
-		    <td><?php echo $pemesanan->nama_tamu ?></td>
-		    <td><?php echo $pemesanan->jumlah_dewasa ?></td>
-		    <td><?php echo $pemesanan->anak ?></td>
+		    <td><?php echo $pemesanan->tamu ?></td>
+		    <td><?php echo $pemesanan->jumlah ?></td>
 		    <td><?php echo $pemesanan->permintaan_spesial ?></td>
 		    <td><?php echo $pemesanan->nama_status_pemesanan ?></td>
 		    <td style="text-align:center" width="140px">

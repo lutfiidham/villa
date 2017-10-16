@@ -20,6 +20,11 @@ class Pemesanan_model extends CI_Model
         return $q; 
     }
 
+    function get_harga($idk){
+        $q = $this->db->query("select harga_kamar from kamar where id_kamar = '$idk' ");
+        return $q->result(); 
+    }
+
     function get_tamu(){
         $q = $this->db->query("select id_tamu, concat(nama_depan_tamu,' ',nama_belakang_tamu) as tamu from tamu order by id_tamu desc");
         return $q->result(); 
@@ -33,15 +38,17 @@ class Pemesanan_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $sql = $this->db->query("select id_pemesanan, concat(no_kamar,'-',nama_kamar) as kamar, total_harga, concat(nama_depan_tamu,' ',nama_belakang_tamu) as tamu, concat(jumlah_dewasa,' Dewasa / ',jumlah_anak,' Anak') as jumlah, permintaan_spesial, nama_status_pemesanan
+        from pemesanan p join kamar k on p.id_kamar = k.id_kamar join tamu t on t.id_tamu = p.id_tamu
+        join status_pemesanan sp on sp.id_status_pemesanan = p.id_status_pemesanan ");
+        return $sql->result();
     }
 
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        return $this->db->get($this->table)->result();   
     }
     
     // get total rows

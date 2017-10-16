@@ -5,7 +5,6 @@ if (!defined('BASEPATH'))
 
 class Pemesanan extends CI_Controller
 {
-        
     function __construct()
     {
         parent::__construct();
@@ -24,6 +23,15 @@ class Pemesanan extends CI_Controller
         $this->template->load('template','pemesanan_list', $data);
     }
 
+    public function get_harga($idk){
+        $val = $this->Pemesanan_model->get_harga($idk);
+        foreach ($val as $value) {
+            $data = array();
+            $data[] = $value->harga_kamar;
+        }
+        echo json_encode($data);
+    }
+
     public function read_cb_tamu(){
         $cb_tamu = $this->Pemesanan_model->get_tamu();
         foreach ($cb_tamu as $value) {
@@ -38,21 +46,12 @@ class Pemesanan extends CI_Controller
         if ($row) {
             $data = array(
 		'id_pemesanan' => $row->id_pemesanan,
-		'waktu_pemesanan' => $row->waktu_pemesanan,
-		'uang_muka' => $row->uang_muka,
-		'sisa_bayar' => $row->sisa_bayar,
 		'total_harga' => $row->total_harga,
-		'id_channel' => $row->id_channel,
-		'id_promo' => $row->id_promo,
-		'id_kamar' => $row->id_kamar,
-		'id_tamu' => $row->id_tamu,
-		'jumlah_dewasa' => $row->jumlah_dewasa,
-		'jumlah_anak' => $row->jumlah_anak,
-		'umur_anak' => $row->umur_anak,
+		'kamar' => $row->kamar,
+		'tamu' => $row->tamu,
+		'jumlah' => $row->jumlah,
 		'permintaan_spesial' => $row->permintaan_spesial,
-		'batas_waktu_pemesanan' => $row->batas_waktu_pemesanan,
 		'id_status_pemesanan' => $row->id_status_pemesanan,
-		'id_pegawai' => $row->id_pegawai,
 	    );
             $this->template->load('template','pemesanan_read', $data);
         } else {
@@ -122,12 +121,12 @@ class Pemesanan extends CI_Controller
 
             //insert check_in
             $id_pemesanan = $this->input->post('id_pemesanan');
-            $plan_ci = date('Y-m-d',strtotime($array[0]));
+            $plan_ci = date('Y-m-d H:i:s',strtotime($array[0].' 14:00:00'));
             $this->Pemesanan_model->insert_ci($id_pemesanan, $plan_ci); 
 
             //insert check_out
             $id_pemesanan = $this->input->post('id_pemesanan');
-            $plan_co = date('Y-m-d',strtotime($array[1]));
+            $plan_co = date('Y-m-d H:i:s',strtotime($array[1].' 12:00:00'));
             $this->Pemesanan_model->insert_co($id_pemesanan, $plan_co); 
             
             //date('dd-mm-YYYY H:i:s',strtotime($this->input->post('waktu_pemesanan') . "+1 days"));

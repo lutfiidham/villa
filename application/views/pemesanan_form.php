@@ -30,7 +30,7 @@
                 </div>
             </td></tr>
 
-            <tr><td>Lama Menginap <?php echo form_error('id_channel') ?></td>
+            <tr><td>Lama Menginap <?php echo form_error('lama_menginap') ?></td>
                 <td><div class='input-group date'>
                     <input type="text" class="form-control" id="lama_menginap" name="lama_menginap"/>
                     <span class="input-group-addon">
@@ -142,25 +142,54 @@
         </div>
 
         <script type="text/javascript">
-            $(document).ready(function() {
-                // $('#tamu_id').combobox({
-                //     url:"<?php echo base_url('index.php?/Pemesanan/read_cb_tamu/') ?>",
-                //     valueField:'id_tamu',
-                //     textField:'tamu'
-                // });
-                // $.ajax({
-                //     url: "<?php echo base_url('index.php?/Pemesanan/read_cb_tamu/') ?>",
-                //     async: false,
-                    
-                //     //data: "provinsi="+selProv,//data yang akan dibawa di url
-                //     dataType: "html",
-                //     success: function(data) {
-                //         $('#tamu_id').html(data);
-                //     }
-                // });
-            });
-           
+        $(document).ready(function(){
+            // var originalVal = $.fn.val;
 
+            // $.fn.val = function(value) {
+            //     if (typeof value == 'undefined') {
+            //         return originalVal.call(this);
+            //     } else {
+            //         setTimeout(function() {
+            //             this.trigger('mask.maskMoney');
+            //         }.bind(this), 100);
+            //         return originalVal.call(this, value);
+            //     }
+            // };
+            
+            //$('#total_harga').maskMoney({prefix:'Rp. ', thousands:'.', decimal:',', precision:0});
+            // $('#total_harga').on('click mousedown mouseup focus blur keydown change input', function(event) {
+            //     console.log('This Happened:'+ event.type);
+            // });
+            // $('#jumlah_dewasa').val(0);
+            // $('#jumlah_anak').val(0);
+            // $('#uang_muka').val(0);
+            // $('#sisa_bayar').val(0);
+            //$('#total_harga').val(0);
+
+            $('#id_kamar').on('change', function() {
+                var idk=$(this).val();
+                var startDate = $('#lama_menginap').data('daterangepicker').startDate._d.getDate;
+                var endDate = $('#lama_menginap').data('daterangepicker').endDate._d;
+
+                console.log(moment().diff(startDate, endDate));
+                // console.log($('#lama_menginap').data('daterangepicker'));
+                $.ajax({
+                    type : "POST",
+                    url: "<?php echo site_url('Pemesanan/get_harga/')?>/" + idk,
+                    dataType : 'json',
+                    success: function(data) {
+                        
+                        var interval = Math.round((endDate.format('dd/mm/YYYY') - startDate.format('dd/mm/YYYY'))/24);
+                        var value = interval * data;
+
+                        $('#total_harga').val(value);
+
+                    },
+                    failure: function(err) {console.log("Error on the Ajax call");}
+                });
+            });    
+        });
+           
             function save_pemesanan(){
                 event.preventDefault();
                 var id_pemesanan = $("#id_pemesanan").val();
@@ -183,6 +212,7 @@
                     success: function(data)
                     {
                         location.reload();
+                        
                     }
                 });
 

@@ -235,8 +235,12 @@
      <script src="<?php echo base_url() ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
 
      <script src="<?php echo base_url() ?>assets/select2/select2.min.js"></script>
+     <script src="<?php echo base_url() ?>assets/js/jquery.maskMoney.min.js"></script>
 
         <script>
+            var startDate;
+            var endDate;
+            
             $(document).ready(function() {
                 $('select').select2({
                     width: '100%'
@@ -261,7 +265,14 @@
                 $('input[name="lama_menginap"]').daterangepicker({
                     locale: {
                       format: 'DD/MM/YYYY'
-                    }
+                     }
+                    // function(start, end) {
+                    //     console.log("Callback has been called!");
+                    //     $('#lama_menginap span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+                    //     startDate = start;
+                    //     endDate = end;    
+                    // }
+                    
                 });
                 
             });

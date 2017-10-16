@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.9
--- https://www.phpmyadmin.net
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2017 at 06:29 PM
--- Server version: 5.6.36
--- PHP Version: 7.1.2
+-- Generation Time: Oct 10, 2017 at 08:19 AM
+-- Server version: 10.1.10-MariaDB
+-- PHP Version: 5.6.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `cek_inventori`
 --
 
-CREATE TABLE IF NOT EXISTS `cek_inventori` (
+CREATE TABLE `cek_inventori` (
   `id_cek_inventori` varchar(10) NOT NULL,
   `id_co` varchar(10) DEFAULT NULL,
   `id_detil_inventori` varchar(10) DEFAULT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `cek_inventori` (
 -- Table structure for table `channel`
 --
 
-CREATE TABLE IF NOT EXISTS `channel` (
+CREATE TABLE `channel` (
   `id_channel` varchar(10) NOT NULL,
   `nama_channel` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -58,7 +58,7 @@ INSERT INTO `channel` (`id_channel`, `nama_channel`) VALUES
 -- Table structure for table `check_in`
 --
 
-CREATE TABLE IF NOT EXISTS `check_in` (
+CREATE TABLE `check_in` (
   `id_ci` varchar(10) NOT NULL,
   `id_kw` varchar(10) DEFAULT NULL,
   `plan_ci` datetime DEFAULT NULL,
@@ -67,13 +67,20 @@ CREATE TABLE IF NOT EXISTS `check_in` (
   `id_pemesanan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `check_in`
+--
+
+INSERT INTO `check_in` (`id_ci`, `id_kw`, `plan_ci`, `real_ci`, `charge_ci`, `id_pemesanan`) VALUES
+('CI-0001', 'KW-0001', '2017-10-09 14:00:00', NULL, NULL, 'BO-0001');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `check_out`
 --
 
-CREATE TABLE IF NOT EXISTS `check_out` (
+CREATE TABLE `check_out` (
   `id_co` varchar(10) NOT NULL,
   `id_pemesanan` varchar(10) DEFAULT NULL,
   `id_kw` varchar(10) DEFAULT NULL,
@@ -82,13 +89,20 @@ CREATE TABLE IF NOT EXISTS `check_out` (
   `charge_co` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `check_out`
+--
+
+INSERT INTO `check_out` (`id_co`, `id_pemesanan`, `id_kw`, `plan_co`, `real_co`, `charge_co`) VALUES
+('CO-0001', 'BO-0001', 'KW-0001', '2017-10-09 12:00:00', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `detil_inventori`
 --
 
-CREATE TABLE IF NOT EXISTS `detil_inventori` (
+CREATE TABLE `detil_inventori` (
   `id_detil_inventori` varchar(10) NOT NULL,
   `id_inventori` varchar(10) NOT NULL,
   `id_kamar` varchar(10) NOT NULL
@@ -100,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `detil_inventori` (
 -- Table structure for table `detil_layanan`
 --
 
-CREATE TABLE IF NOT EXISTS `detil_layanan` (
+CREATE TABLE `detil_layanan` (
   `id_layanan` varchar(10) NOT NULL,
   `id_pemesanan` varchar(10) NOT NULL,
   `charge_layanan` int(11) DEFAULT NULL
@@ -112,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `detil_layanan` (
 -- Table structure for table `inventori`
 --
 
-CREATE TABLE IF NOT EXISTS `inventori` (
+CREATE TABLE `inventori` (
   `id_inventori` varchar(10) NOT NULL,
   `nama_inventori` varchar(10) DEFAULT NULL,
   `harga_inventori` varchar(10) DEFAULT NULL
@@ -124,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `inventori` (
 -- Table structure for table `jabatan`
 --
 
-CREATE TABLE IF NOT EXISTS `jabatan` (
+CREATE TABLE `jabatan` (
   `id_jabatan` varchar(10) NOT NULL,
   `nama_jabatan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -143,7 +157,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 -- Table structure for table `kamar`
 --
 
-CREATE TABLE IF NOT EXISTS `kamar` (
+CREATE TABLE `kamar` (
   `id_kamar` varchar(10) NOT NULL,
   `nama_kamar` varchar(20) DEFAULT NULL,
   `no_kamar` int(11) DEFAULT NULL,
@@ -157,7 +171,8 @@ CREATE TABLE IF NOT EXISTS `kamar` (
 --
 
 INSERT INTO `kamar` (`id_kamar`, `nama_kamar`, `no_kamar`, `kapasitas`, `status_kamar`, `harga_kamar`) VALUES
-('KA-0001', 'Melati', 1, 4, 'free', 500000);
+('KA-0001', 'Melati', 1, 4, 'available', 500000),
+('KA-0002', 'Melati', 2, 3, 'available', 500000);
 
 -- --------------------------------------------------------
 
@@ -165,13 +180,20 @@ INSERT INTO `kamar` (`id_kamar`, `nama_kamar`, `no_kamar`, `kapasitas`, `status_
 -- Table structure for table `ketentuan_waktu`
 --
 
-CREATE TABLE IF NOT EXISTS `ketentuan_waktu` (
+CREATE TABLE `ketentuan_waktu` (
   `id_kw` varchar(10) NOT NULL,
-  `toleransi_ci` datetime DEFAULT NULL,
-  `toleransi_co` datetime DEFAULT NULL,
+  `toleransi_ci` int(11) DEFAULT NULL,
+  `toleransi_co` int(11) DEFAULT NULL,
   `presentase_eci` int(11) DEFAULT NULL,
   `presentase_lco` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ketentuan_waktu`
+--
+
+INSERT INTO `ketentuan_waktu` (`id_kw`, `toleransi_ci`, `toleransi_co`, `presentase_eci`, `presentase_lco`) VALUES
+('KW-0001', 1, 1, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -179,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `ketentuan_waktu` (
 -- Table structure for table `layanan`
 --
 
-CREATE TABLE IF NOT EXISTS `layanan` (
+CREATE TABLE `layanan` (
   `id_layanan` varchar(10) NOT NULL,
   `nama_layanan` varchar(20) DEFAULT NULL,
   `biaya_layanan` varchar(10) DEFAULT NULL
@@ -191,14 +213,14 @@ CREATE TABLE IF NOT EXISTS `layanan` (
 -- Table structure for table `menu`
 --
 
-CREATE TABLE IF NOT EXISTS `menu` (
+CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `link` varchar(50) NOT NULL,
   `icon` varchar(30) NOT NULL,
   `is_active` int(1) NOT NULL,
   `is_parent` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `menu`
@@ -215,7 +237,8 @@ INSERT INTO `menu` (`id`, `name`, `link`, `icon`, `is_active`, `is_parent`) VALU
 (27, 'Inventori', 'inventori', 'fa fa-list', 1, 20),
 (28, 'Detail Inventori', 'detail_inventori', 'fa fa-list', 1, 20),
 (29, 'Ketentuan Waktu', 'ketentuan_waktu', 'fa fa-clock-o', 1, 20),
-(30, 'Channel', 'channel', 'fa fa-plane', 1, 20);
+(30, 'Channel', 'channel', 'fa fa-plane', 1, 20),
+(31, 'BOOKING', 'Pemesanan', 'fa fa-book', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -223,7 +246,7 @@ INSERT INTO `menu` (`id`, `name`, `link`, `icon`, `is_active`, `is_parent`) VALU
 -- Table structure for table `pegawai`
 --
 
-CREATE TABLE IF NOT EXISTS `pegawai` (
+CREATE TABLE `pegawai` (
   `id_pegawai` varchar(10) NOT NULL,
   `id_jabatan` varchar(10) DEFAULT NULL,
   `nama_pegawai` varchar(30) DEFAULT NULL,
@@ -245,9 +268,9 @@ INSERT INTO `pegawai` (`id_pegawai`, `id_jabatan`, `nama_pegawai`, `alamat_pegaw
 -- Table structure for table `pemesanan`
 --
 
-CREATE TABLE IF NOT EXISTS `pemesanan` (
+CREATE TABLE `pemesanan` (
   `id_pemesanan` varchar(10) NOT NULL,
-  `waktu_pemesanan` varchar(10) DEFAULT NULL,
+  `waktu_pemesanan` datetime DEFAULT NULL,
   `uang_muka` varchar(10) DEFAULT NULL,
   `sisa_bayar` varchar(10) DEFAULT NULL,
   `total_harga` varchar(10) DEFAULT NULL,
@@ -257,12 +280,18 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
   `id_tamu` varchar(10) DEFAULT NULL,
   `jumlah_dewasa` int(11) DEFAULT NULL,
   `jumlah_anak` int(11) DEFAULT NULL,
-  `umur_anak` int(11) DEFAULT NULL,
   `permintaan_spesial` varchar(100) DEFAULT NULL,
-  `batas_waktu_pemesa` datetime DEFAULT NULL,
-  `id_status_pemesana` varchar(10) DEFAULT NULL,
+  `batas_waktu_pemesanan` datetime DEFAULT NULL,
+  `id_status_pemesanan` varchar(10) DEFAULT NULL,
   `id_pegawai` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`id_pemesanan`, `waktu_pemesanan`, `uang_muka`, `sisa_bayar`, `total_harga`, `id_channel`, `id_promo`, `id_kamar`, `id_tamu`, `jumlah_dewasa`, `jumlah_anak`, `permintaan_spesial`, `batas_waktu_pemesanan`, `id_status_pemesanan`, `id_pegawai`) VALUES
+('BO-0001', '2017-10-11 11:39:00', '200', '100', '300', 'CH-0001', 'PR-0001', 'KA-0001', 'TA-0001', 2, 0, 'rrr', '2017-10-12 11:39:00', 'ST-0001', 'PE-0001');
 
 -- --------------------------------------------------------
 
@@ -270,13 +299,21 @@ CREATE TABLE IF NOT EXISTS `pemesanan` (
 -- Table structure for table `promo`
 --
 
-CREATE TABLE IF NOT EXISTS `promo` (
+CREATE TABLE `promo` (
   `id_promo` varchar(10) NOT NULL,
+  `nama_promo` varchar(30) NOT NULL,
   `promo_awal` datetime DEFAULT NULL,
   `promo_akhir` datetime DEFAULT NULL,
   `diskon_promo` varchar(10) DEFAULT NULL,
-  `ket__promo` varchar(10) DEFAULT NULL
+  `ket_promo` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `promo`
+--
+
+INSERT INTO `promo` (`id_promo`, `nama_promo`, `promo_awal`, `promo_akhir`, `diskon_promo`, `ket_promo`) VALUES
+('PR-0001', 'No Promo', '2017-01-01 00:00:00', '2017-12-31 00:00:00', '0', 'Tidak Ada');
 
 -- --------------------------------------------------------
 
@@ -284,10 +321,19 @@ CREATE TABLE IF NOT EXISTS `promo` (
 -- Table structure for table `status_pemesanan`
 --
 
-CREATE TABLE IF NOT EXISTS `status_pemesanan` (
+CREATE TABLE `status_pemesanan` (
   `id_status_pemesanan` varchar(10) NOT NULL,
   `nama_status_pemesanan` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `status_pemesanan`
+--
+
+INSERT INTO `status_pemesanan` (`id_status_pemesanan`, `nama_status_pemesanan`) VALUES
+('ST-0001', 'Paid'),
+('ST-0002', 'Arrears Payment'),
+('ST-0003', 'Expired');
 
 -- --------------------------------------------------------
 
@@ -295,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `status_pemesanan` (
 -- Table structure for table `tamu`
 --
 
-CREATE TABLE IF NOT EXISTS `tamu` (
+CREATE TABLE `tamu` (
   `id_tamu` varchar(10) NOT NULL,
   `tanda_pengenal` varchar(10) DEFAULT NULL,
   `nomor_pengenal` varchar(25) DEFAULT NULL,
@@ -304,6 +350,15 @@ CREATE TABLE IF NOT EXISTS `tamu` (
   `kebangsaan` varchar(50) DEFAULT NULL,
   `nama_belakang_tamu` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tamu`
+--
+
+INSERT INTO `tamu` (`id_tamu`, `tanda_pengenal`, `nomor_pengenal`, `nama_depan_tamu`, `telepon_tamu`, `kebangsaan`, `nama_belakang_tamu`) VALUES
+('TA-0001', 'KTP', '3567', 'Atika', '0786', 'Indonesia', 'Rizky'),
+('TA-0002', NULL, '1234', 'Aisyah', '123', 'Eru', 'Salsa'),
+('TA-0003', NULL, '134566', 'Alia', '343567', 'Ydsbb', 'Jul');
 
 --
 -- Indexes for dumped tables
@@ -406,7 +461,7 @@ ALTER TABLE `pemesanan`
   ADD KEY `fk_melakukan4` (`id_pegawai`),
   ADD KEY `fk_menggunakan2` (`id_promo`),
   ADD KEY `fk_sewa` (`id_kamar`),
-  ADD KEY `fk_status_pesan` (`id_status_pemesana`),
+  ADD KEY `fk_status_pesan` (`id_status_pemesanan`),
   ADD KEY `fk_via` (`id_channel`);
 
 --
@@ -435,7 +490,7 @@ ALTER TABLE `tamu`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- Constraints for dumped tables
 --
@@ -489,7 +544,7 @@ ALTER TABLE `pemesanan`
   ADD CONSTRAINT `fk_melakukan4` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`),
   ADD CONSTRAINT `fk_menggunakan2` FOREIGN KEY (`id_promo`) REFERENCES `promo` (`id_promo`),
   ADD CONSTRAINT `fk_sewa` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`),
-  ADD CONSTRAINT `fk_status_pesan` FOREIGN KEY (`id_status_pemesana`) REFERENCES `status_pemesanan` (`id_status_pemesanan`),
+  ADD CONSTRAINT `fk_status_pesan` FOREIGN KEY (`id_status_pemesanan`) REFERENCES `status_pemesanan` (`id_status_pemesanan`),
   ADD CONSTRAINT `fk_via` FOREIGN KEY (`id_channel`) REFERENCES `channel` (`id_channel`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
