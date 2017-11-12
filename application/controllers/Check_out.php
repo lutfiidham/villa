@@ -78,9 +78,6 @@ class Check_out extends CI_Controller
             //     'id_co' => set_value('id_co'),
             //     'kamar' => set_value('kamar'),
             //     'charge_co' => set_value('charge_co'),
-            //     'nama_inventori' => $row->nama_inventori,
-            //     'harga_inventori' => $row->harga_inventori,
-            //     'jumlah_detil_inventori' => $row->jumlah_detil_inventori
             // );
             $data = array(
                 'detil_inv_data' => $row
