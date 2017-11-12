@@ -32,6 +32,25 @@ class Pemesanan extends CI_Controller
         echo json_encode($data);
     }
 
+    public function get_kamar(){
+        $val = $this->Pemesanan_model->get_kamar($awal, $akhir);
+        foreach ($val as $value) {
+            $data = array();
+            $data[] = $value->id_kamar;
+            $data[] = $value->kamar;
+        }
+        echo json_encode($data);
+    }
+
+    public function get_promo_diskon($idx){
+        $val = $this->Pemesanan_model->get_promo_diskon($idx);
+        foreach ($val as $value) {
+            $data = array();
+            $data[] = $value->diskon_promo;
+        }
+        echo json_encode($data);
+    }
+
     public function read_cb_tamu(){
         $cb_tamu = $this->Pemesanan_model->get_tamu();
         foreach ($cb_tamu as $value) {
@@ -43,15 +62,23 @@ class Pemesanan extends CI_Controller
     public function read($id) 
     {
         $row = $this->Pemesanan_model->get_by_id($id);
+        
         if ($row) {
             $data = array(
 		'id_pemesanan' => $row->id_pemesanan,
-		'total_harga' => $row->total_harga,
-		'kamar' => $row->kamar,
+        'waktu_pemesanan' => $row->waktu_pemesanan,
 		'tamu' => $row->tamu,
-		'jumlah' => $row->jumlah,
+		'jumlah_dewasa' => $row->jumlah_dewasa,
+		'jumlah_anak' => $row->jumlah_anak,
+		'channel' => $row->nama_channel,
+        'lama_menginap' => $row->lama_menginap,
+        'kamar' => $row->kamar,
+        'promo' => $row->promo,
+        'uang_muka' => $row->uang_muka,
+        'sisa_bayar' => $row->sisa_bayar,
+        'total_harga' => $row->total_harga,
 		'permintaan_spesial' => $row->permintaan_spesial,
-		'id_status_pemesanan' => $row->id_status_pemesanan,
+		'nama_status_pemesanan' => $row->nama_status_pemesanan,
 	    );
             $this->template->load('template','pemesanan_read', $data);
         } else {
@@ -97,8 +124,8 @@ class Pemesanan extends CI_Controller
         // if ($this->form_validation->run() == FALSE) {
         //     $this->create();
         // } else {
-            $lama = $this->input->post('lama_menginap');
-            $array  = explode('-',$lama);
+            // $lama = $this->input->post('lama_menginap');
+            // $array  = explode('-',$lama);
 
             $data_p = array(
         		'id_pemesanan' => $this->input->post('id_pemesanan'),
@@ -121,20 +148,15 @@ class Pemesanan extends CI_Controller
 
             //insert check_in
             $id_pemesanan = $this->input->post('id_pemesanan');
-            $plan_ci = date('Y-m-d H:i:s',strtotime($array[0].' 14:00:00'));
+            // $plan_ci = date('Y-m-d H:i:s',strtotime($array[1].' 14:00:00'));
+            $plan_ci = date('Y-m-d H:i:s',strtotime($this->input->post('st').' 14:00:00'));
             $this->Pemesanan_model->insert_ci($id_pemesanan, $plan_ci); 
 
             //insert check_out
             $id_pemesanan = $this->input->post('id_pemesanan');
-            $plan_co = date('Y-m-d H:i:s',strtotime($array[1].' 12:00:00'));
+            // $plan_co = date('Y-m-d H:i:s',strtotime($array[1].' 12:00:00'));
+            $plan_co = date('Y-m-d H:i:s',strtotime($this->input->post('ed').' 12:00:00'));
             $this->Pemesanan_model->insert_co($id_pemesanan, $plan_co); 
-            
-            //date('dd-mm-YYYY H:i:s',strtotime($this->input->post('waktu_pemesanan') . "+1 days"));
-            //var_dump($this->input->post('daterange'));
-
-            // $this->session->set_flashdata('message', 'Create Record Success');
-            // redirect(site_url('pemesanan'));
-        //}
     }
     
     public function update($id) 

@@ -29,6 +29,9 @@
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2.min.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/select2/select2-bootstrap.css">
         <link rel="stylesheet" href="<?php echo base_url() ?>assets/datepicker/bootstrap-datetimepicker.css">
+
+        <script src="<?php echo base_url() ?>assets/js/jquery-latest.min.js"></script>
+        
         <!--<style type="text/css">
             [class^='select2'] {
               border-radius: 0px !important;
@@ -251,6 +254,10 @@
                 });
             });
 
+            var _cmn;
+            var st;
+            var ed;
+
             $(function () {
                 $("#example1").DataTable();
                 $('#example2').DataTable({
@@ -262,19 +269,18 @@
                     "autoWidth": false
                 });
 
-                $('input[name="lama_menginap"]').daterangepicker({
+                $("#lama_menginap").daterangepicker(
+                {
                     locale: {
-                      format: 'DD/MM/YYYY'
-                     }
-                    // function(start, end) {
-                    //     console.log("Callback has been called!");
-                    //     $('#lama_menginap span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
-                    //     startDate = start;
-                    //     endDate = end;    
-                    // }
-                    
+                      format: 'YYYY-MM-DD'
+                    },
+                }, 
+                function(start, end, label) {
+                    var days = end.diff(start, 'days');
+                    _cmn = days;
+                    st = start;
+                    ed = end;
                 });
-                
             });
         </script>
     </body>

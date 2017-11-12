@@ -8,9 +8,9 @@
           <h3 class='box-title'>PEMESANAN</h3>
           <div class='box box-primary'>
             <?php 
-            $lama = '05/10/2017 - 06/10/2017';
-            $array  = explode('-',$lama); 
-            print_r($array[1]);?>
+            // $lama = '05/10/2017 - 06/10/2017';
+            // $array  = explode('-',$lama); 
+            // print_r($array[1]);?>
             <form role="form" id="pemesanan_form"><table class='table table-bordered'>
                <tr><td>Id Pemesanan <?php echo form_error('id_pemesanan') ?></td>
                 <td><input readonly type="text" class="form-control" name="id_pemesanan" id="id_pemesanan" placeholder="Id Pemesanan" value="<?php 
@@ -30,23 +30,6 @@
                 </div>
             </td></tr>
 
-            <tr><td>Lama Menginap <?php echo form_error('lama_menginap') ?></td>
-                <td><div class='input-group date'>
-                    <input type="text" class="form-control" id="lama_menginap" name="lama_menginap"/>
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-                </td></tr>
-
-            <tr><td>Channel <?php echo form_error('id_channel') ?></td>
-                <td><?php echo cmb_dinamis('id_channel','channel', 'nama_channel','id_channel','id_channel') ?>
-                </td></tr>
-
-            <tr><td>Kamar <?php echo form_error('id_kamar') ?></td>
-                <td><?php echo cmb_kamar('id_kamar','id_kamar') ?>
-                </td></tr>
-
             <tr><td>Tamu <?php echo form_error('tamu_id') ?></td>
                 <td>
                     <div class="input-group">
@@ -65,8 +48,21 @@
                 <td><input type="text" class="form-control" name="jumlah_anak" id="jumlah_anak" placeholder="Jumlah Anak" size="15px" />
                 </td></tr>
 
-            <tr><td>Permintaan Spesial <?php echo form_error('permintaan_spesial') ?></td>
-                <td><textarea class="form-control" name="permintaan_spesial" id="permintaan_spesial" placeholder="Permintaan Spesial"></textarea>
+            <tr><td>Channel <?php echo form_error('id_channel') ?></td>
+                <td><?php echo cmb_dinamis('id_channel','channel', 'nama_channel','id_channel','id_channel') ?>
+            </td></tr>
+
+            <tr><td>Lama Menginap <?php echo form_error('lama_menginap') ?></td>
+                <td><div class='input-group date'>
+                    <input type="text" class="form-control" id="lama_menginap" name="lama_menginap"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                </td></tr>
+
+            <tr><td>Kamar <?php echo form_error('id_kamar') ?></td>
+                <td><?php echo cmb_kamar('id_kamar','id_kamar') ?>
                 </td></tr>
 
             <tr><td>Promo <?php echo form_error('id_promo') ?></td>
@@ -74,15 +70,19 @@
                 </td></tr>
 
             <tr><td>Uang Muka <?php echo form_error('uang_muka') ?></td>
-                <td><input type="text" class="form-control" name="uang_muka" id="uang_muka" placeholder="Uang Muka" />
+                <td><input type="text" class="form-control" name="uang_muka" id="uang_muka" placeholder="Uang Muka" onkeyup="sum();" />
                 </td></tr>
 
             <tr><td>Sisa Bayar <?php echo form_error('sisa_bayar') ?></td>
-                <td><input type="text" class="form-control" name="sisa_bayar" id="sisa_bayar" placeholder="Sisa Bayar" />
+                <td><input type="text" class="form-control" name="sisa_bayar" id="sisa_bayar" placeholder="Sisa Bayar" readonly/>
                 </td></tr>
 
             <tr><td>Total Harga <?php echo form_error('total_harga') ?></td>
-                <td><input type="text" class="form-control" name="total_harga" id="total_harga" placeholder="Total Harga" />
+                <td><input type="text" class="form-control" name="total_harga" id="total_harga" placeholder="Total Harga" onkeyup="sum();" readonly/>
+                </td></tr>
+
+            <tr><td>Permintaan Spesial <?php echo form_error('permintaan_spesial') ?></td>
+                <td><textarea class="form-control" name="permintaan_spesial" id="permintaan_spesial" placeholder="Permintaan Spesial"></textarea>
                 </td></tr>
 
             <tr><td colspan='2'><button onclick="save_pemesanan()" class="btn btn-primary">Save</button> 
@@ -143,20 +143,20 @@
 
         <script type="text/javascript">
         $(document).ready(function(){
-            // var originalVal = $.fn.val;
+            var originalVal = $.fn.val;
 
-            // $.fn.val = function(value) {
-            //     if (typeof value == 'undefined') {
-            //         return originalVal.call(this);
-            //     } else {
-            //         setTimeout(function() {
-            //             this.trigger('mask.maskMoney');
-            //         }.bind(this), 100);
-            //         return originalVal.call(this, value);
-            //     }
-            // };
+            $.fn.val = function(value) {
+                if (typeof value == 'undefined') {
+                    return originalVal.call(this);
+                } else {
+                    setTimeout(function() {
+                        this.trigger('mask.maskMoney');
+                    }.bind(this), 100);
+                    return originalVal.call(this, value);
+                }
+            };
             
-            //$('#total_harga').maskMoney({prefix:'Rp. ', thousands:'.', decimal:',', precision:0});
+            // $('#total_harga').maskMoney({prefix:'Rp ', thousands:'.', decimal:',', precision:0});
             // $('#total_harga').on('click mousedown mouseup focus blur keydown change input', function(event) {
             //     console.log('This Happened:'+ event.type);
             // });
@@ -166,30 +166,46 @@
             // $('#sisa_bayar').val(0);
             //$('#total_harga').val(0);
 
+            var value;
+
             $('#id_kamar').on('change', function() {
                 var idk=$(this).val();
-                var startDate = $('#lama_menginap').data('daterangepicker').startDate._d.getDate;
-                var endDate = $('#lama_menginap').data('daterangepicker').endDate._d;
 
-                console.log(moment().diff(startDate, endDate));
-                // console.log($('#lama_menginap').data('daterangepicker'));
                 $.ajax({
                     type : "POST",
                     url: "<?php echo site_url('Pemesanan/get_harga/')?>/" + idk,
                     dataType : 'json',
                     success: function(data) {
-                        
-                        var interval = Math.round((endDate.format('dd/mm/YYYY') - startDate.format('dd/mm/YYYY'))/24);
-                        var value = interval * data;
-
+                        value = _cmn * data;
                         $('#total_harga').val(value);
+                    },
+                    failure: function(err) {console.log("Error on the Ajax call");}
+                });
+            });
 
+            $('#id_promo').on('change', function() {
+                var idx=$(this).val();
+
+                $.ajax({
+                    type : "POST",
+                    url: "<?php echo site_url('Pemesanan/get_promo_diskon/')?>/" + idx,
+                    dataType : 'json',
+                    success: function(data) {
+                        var res = value * (100-data) / 100;
+                        $('#total_harga').val(res);
                     },
                     failure: function(err) {console.log("Error on the Ajax call");}
                 });
             });    
         });
            
+            function sum(){
+                var ttl = $('#total_harga').val();
+                var um = $('#uang_muka').val();
+                var result = um - ttl;
+                $("#sisa_bayar").val(result);
+            }
+
             function save_pemesanan(){
                 event.preventDefault();
                 var id_pemesanan = $("#id_pemesanan").val();
@@ -204,13 +220,16 @@
                 var jumlah_dewasa = $("#jumlah_dewasa").val();
                 var jumlah_anak = $("#jumlah_anak").val();
                 var permintaan_spesial = $("#permintaan_spesial").val();
+                var sta = st;
+                var ede = ed;
 
                 $.ajax({
                     type: "POST",
                     url : "<?php echo base_url('index.php/Pemesanan/create_action')?>",
-                    data: { id_pemesanan:id_pemesanan,waktu_pemesanan:waktu_pemesanan,uang_muka:uang_muka,sisa_bayar:sisa_bayar,total_harga:total_harga,id_channel:id_channel,id_promo:id_promo,id_kamar:id_kamar,tamu_id:tamu_id,jumlah_dewasa:jumlah_dewasa,jumlah_anak:jumlah_anak,permintaan_spesial:permintaan_spesial},
+                    data: { id_pemesanan:id_pemesanan,waktu_pemesanan:waktu_pemesanan,uang_muka:uang_muka,sisa_bayar:sisa_bayar,total_harga:total_harga,id_channel:id_channel,id_promo:id_promo,id_kamar:id_kamar,tamu_id:tamu_id,jumlah_dewasa:jumlah_dewasa,jumlah_anak:jumlah_anak,permintaan_spesial:permintaan_spesial,sta:st,ede:ed},
                     success: function(data)
                     {
+                        alert(sta + "." + ede);
                         location.reload();
                         
                     }

@@ -14,7 +14,8 @@
                     <th width="80px">No</th>
 		    <th>Id Inventori</th>
 		    <th>Nama Inventori</th>
-		    <th>Harga Inventori</th>
+            <th>Harga Inventori</th>
+		    <th>Jumlah Inventori</th>
 		    <th>Action</th>
                 </tr>
             </thead>
@@ -28,7 +29,8 @@
 		    <td><?php echo ++$start ?></td>
 		    <td><?php echo $inventori->id_inventori ?></td>
 		    <td><?php echo $inventori->nama_inventori ?></td>
-		    <td><?php echo $inventori->harga_inventori ?></td>
+            <td><?php echo $inventori->harga_inventori ?></td>
+		    <td><?php echo $inventori->jumlah_inventori ?></td>
 		    <td style="text-align:center" width="140px">
 			<?php 
 			echo anchor(site_url('inventori/read/'.$inventori->id_inventori),'<i class="fa fa-eye"></i>',array('title'=>'detail','class'=>'btn btn-danger btn-sm')); 

@@ -34,7 +34,8 @@ class Inventori_model extends CI_Model
         $this->db->like('id_inventori', $q);
 	$this->db->or_like('id_inventori', $q);
 	$this->db->or_like('nama_inventori', $q);
-	$this->db->or_like('harga_inventori', $q);
+    $this->db->or_like('harga_inventori', $q);
+	$this->db->or_like('jumlah_inventori', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -45,7 +46,8 @@ class Inventori_model extends CI_Model
         $this->db->like('id_inventori', $q);
 	$this->db->or_like('id_inventori', $q);
 	$this->db->or_like('nama_inventori', $q);
-	$this->db->or_like('harga_inventori', $q);
+    $this->db->or_like('harga_inventori', $q);
+	$this->db->or_like('jumlah_inventori', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

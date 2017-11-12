@@ -5,10 +5,11 @@
               <div class='box'>
                 <div class='box-header'>
                 
-                  <h3 class='box-title'>CHECK_IN</h3>
+                  <h3 class='box-title'>CHECK_OUT</h3>
                       <div class='box box-primary'>
-        <form action="<?php echo $action; ?>" method="post" id="ci_form"><table class='table table-bordered'>
-	         <tr><td>Id Pemesanan <?php echo form_error('id_pemesanan') ?></td>
+        <form action="<?php echo $action; ?>" method="post"><table class='table table-bordered'>
+	   
+	    <tr><td>Id Pemesanan <?php echo form_error('id_pemesanan') ?></td>
             <td>
               <div class="input-group">
                     <input type="text" class="form-control" name="id_pemesanan" id="id_pemesanan" placeholder="Id Pemesanan" value="<?php echo $id_pemesanan; ?>" />
@@ -16,7 +17,7 @@
                     <button type="button" class="btn btn-success" onclick="search_booking()"><i class="fa fa-search"></i></button>
                     </span>
         </td>
-        <tr><td>Nama Tamu <?php echo form_error('nama_tamu') ?>
+	    <tr><td>Nama Tamu <?php echo form_error('nama_tamu') ?>
         </td>
             <td><input type="text" class="form-control" name="nama_tamu" id="nama_tamu" placeholder="Nama Tamu" />
             </td>
@@ -28,19 +29,31 @@
         </td>
             <td><input type="text" class="form-control" name="kamar" id="kamar" placeholder="Kamar" />
             </td>
-	    <tr><td>Plan Check In <?php echo form_error('plan_ci') ?></td>
-            <td><input type="text" class="form-control" name="plan_ci" id="plan_ci" placeholder="Plan Check In" value="<?php echo $plan_ci; ?>" />
+	    <tr><td>Plan Co <?php echo form_error('plan_co') ?></td>
+            <td><input type="text" class="form-control" name="plan_co" id="plan_co" placeholder="Plan Co" value="<?php echo $plan_co; ?>" />
         </td>
-	    <tr><td>Real Check In <?php echo form_error('real_ci') ?></td>
-            <td><input type="text" class="form-control" name="real_ci" id="real_ci" placeholder="Real Check In" value="<?php echo $real_ci; ?>"  />
+	    <tr><td>Real Co <?php echo form_error('real_co') ?></td>
+            <td><input type="text" class="form-control" name="real_co" id="real_co" placeholder="Real Co" value="<?php echo $real_co; ?>" />
         </td>
-	    <tr><td>Charge Check In <?php echo form_error('charge_ci') ?></td>
-            <td><input type="text" class="form-control" name="charge_ci" id="charge_ci" placeholder="Charge Check In" value="<?php echo $charge_ci; ?>"/>
+	    <tr><td>Charge Co <?php echo form_error('charge_co') ?></td>
+            <td><input type="text" class="form-control" name="charge_co" id="charge_co" placeholder="Charge Co" value="<?php echo $charge_co; ?>" />
         </td>
-	    <tr><td colspan='2'><button type="submit" class="btn btn-primary" onclick="update_ci()">Check In</button> 
-	    <a href="<?php echo site_url('check_in') ?>" class="btn btn-default">Cancel</a></td></tr>
+        
+        <input type="hidden" class="form-control" name="id_co" id="id_co">
+
+        <input type="hidden" class="form-control" name="id_cv" id="id_cv" value="<?php 
+            if ($button == "Create") {
+              echo gen_id("cv", "cek_inventori", "id_cek_inventori", "4", "4");
+            }else{
+              echo $id_cv;
+            }
+             ?>" />
+
+	    <tr><td colspan='2'><button type="submit" class="btn btn-primary" onclick="update_co()"><?php echo $button ?></button> 
+	    <a href="<?php echo site_url('check_out') ?>" class="btn btn-default">Cancel</a></td></tr>
 	
     </table></form>
+
     <script type="text/javascript">
     $(document).ready(function(){
      
@@ -68,7 +81,7 @@
       }   
       var dateTime = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;   
      
-      $('#real_ci').attr("value", dateTime);
+      $('#real_co').attr("value", dateTime);
 
     });
 
@@ -77,29 +90,30 @@
 
         $.ajax({
           type: "GET",
-          url : "<?php echo base_url('index.php/Check_in/search_booking/')?>/" + id,
+          url : "<?php echo base_url('index.php/Check_out/search_booking/')?>/" + id,
           dataType : "JSON",
           success: function(data) {
             $("#nama_tamu").val(data[0].tamu);
             $("#jumlah_tamu").val(data[0].jumlah_tamu);
             $("#kamar").val(data[0].kamar);
-            $("#plan_ci").val(data[0].plan_ci);
-            $("#charge_ci").val(data[0].charge_ci);
+            $("#plan_co").val(data[0].plan_co);
+            $("#charge_co").val(data[0].charge_co);
+            $("#id_co").val(data[0].id_co);
           }
         });
       }
 
-      function update_ci(){
+      function update_co(){
         event.preventDefault();
         var id_pemesanan = $("#id_pemesanan").val();
-        var real_ci = $("#real_ci").val();
-        var charge_ci = $("#charge_ci").val();
+        var real_co = $("#real_co").val();
+        var charge_co = $("#charge_co").val();
 
         $.ajax({
             type: "POST",
             dataType : "JSON",
-            url : "<?php echo base_url('index.php/Check_in/update_ci/')?>",
-            data: {id_pemesanan:id_pemesanan,real_ci:real_ci,charge_ci:charge_ci},
+            url : "<?php echo base_url('index.php/Check_out/update_co/')?>",
+            data: {id_pemesanan:id_pemesanan,real_co:real_co,charge_co:charge_co},
             success: function(data)
             {
                 window.location.reload();
@@ -108,6 +122,7 @@
     }
 
     </script>
+
     </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->

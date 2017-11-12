@@ -23,6 +23,9 @@
 	    <tr><td>Harga Inventori <?php echo form_error('harga_inventori') ?></td>
             <td><input type="text" class="form-control" name="harga_inventori" id="harga_inventori" placeholder="Harga Inventori" value="<?php echo $harga_inventori; ?>" />
         </td>
+      <tr><td>Jumlah Inventori <?php echo form_error('jumlah_inventori') ?></td>
+            <td><input type="text" class="form-control" name="jumlah_inventori" id="jumlah_inventori" placeholder="Harga Inventori" value="<?php echo $harga_inventori; ?>" />
+        </td>
 	    <tr><td colspan='2'><button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('inventori') ?>" class="btn btn-default">Cancel</a></td></tr>
 	

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2017 at 08:19 AM
+-- Generation Time: Nov 04, 2017 at 09:45 AM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -72,7 +72,9 @@ CREATE TABLE `check_in` (
 --
 
 INSERT INTO `check_in` (`id_ci`, `id_kw`, `plan_ci`, `real_ci`, `charge_ci`, `id_pemesanan`) VALUES
-('CI-0001', 'KW-0001', '2017-10-09 14:00:00', NULL, NULL, 'BO-0001');
+('CI-0001', 'KW-0001', '2017-10-31 14:00:00', NULL, NULL, 'BO-0001'),
+('CI-0002', 'KW-0001', '2017-11-01 14:00:00', NULL, NULL, 'BO-0002'),
+('CI-0003', 'KW-0001', '2017-11-01 14:00:00', NULL, NULL, 'BO-0003');
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,9 @@ CREATE TABLE `check_out` (
 --
 
 INSERT INTO `check_out` (`id_co`, `id_pemesanan`, `id_kw`, `plan_co`, `real_co`, `charge_co`) VALUES
-('CO-0001', 'BO-0001', 'KW-0001', '2017-10-09 12:00:00', NULL, NULL);
+('CO-0001', 'BO-0001', 'KW-0001', '2017-10-31 12:00:00', NULL, NULL),
+('CO-0002', 'BO-0002', 'KW-0001', '2017-11-01 12:00:00', NULL, NULL),
+('CO-0003', 'BO-0003', 'KW-0001', '2017-11-01 12:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,7 +242,8 @@ INSERT INTO `menu` (`id`, `name`, `link`, `icon`, `is_active`, `is_parent`) VALU
 (28, 'Detail Inventori', 'detail_inventori', 'fa fa-list', 1, 20),
 (29, 'Ketentuan Waktu', 'ketentuan_waktu', 'fa fa-clock-o', 1, 20),
 (30, 'Channel', 'channel', 'fa fa-plane', 1, 20),
-(31, 'BOOKING', 'Pemesanan', 'fa fa-book', 1, 0);
+(31, 'BOOKING', 'Pemesanan', 'fa fa-book', 1, 0),
+(32, 'Check In', 'Check_in', 'fa fa-sign-in', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -291,7 +296,9 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id_pemesanan`, `waktu_pemesanan`, `uang_muka`, `sisa_bayar`, `total_harga`, `id_channel`, `id_promo`, `id_kamar`, `id_tamu`, `jumlah_dewasa`, `jumlah_anak`, `permintaan_spesial`, `batas_waktu_pemesanan`, `id_status_pemesanan`, `id_pegawai`) VALUES
-('BO-0001', '2017-10-11 11:39:00', '200', '100', '300', 'CH-0001', 'PR-0001', 'KA-0001', 'TA-0001', 2, 0, 'rrr', '2017-10-12 11:39:00', 'ST-0001', 'PE-0001');
+('BO-0001', '2017-10-25 12:36:00', '12000000', '0', '12000000', 'CH-0001', 'PR-0001', 'KA-0001', 'TA-0001', 2, 1, '', '2017-10-26 12:36:00', 'ST-0001', 'PE-0001'),
+('BO-0002', '2017-11-01 10:40:00', '1000000', '0', '1000000', 'CH-0001', 'PR-0001', 'KA-0001', 'TA-0002', 2, 1, '', '2017-11-02 10:40:00', 'ST-0001', 'PE-0001'),
+('BO-0003', '2017-11-01 11:04:00', '1000000', '0', '1000000', 'CH-0001', 'PR-0001', 'KA-0002', 'TA-0001', 2, 1, '', '2017-11-02 11:04:00', 'ST-0001', 'PE-0001');
 
 -- --------------------------------------------------------
 
@@ -313,7 +320,8 @@ CREATE TABLE `promo` (
 --
 
 INSERT INTO `promo` (`id_promo`, `nama_promo`, `promo_awal`, `promo_akhir`, `diskon_promo`, `ket_promo`) VALUES
-('PR-0001', 'No Promo', '2017-01-01 00:00:00', '2017-12-31 00:00:00', '0', 'Tidak Ada');
+('PR-0001', 'No Promo', '2017-01-01 00:00:00', '2017-12-31 00:00:00', '0', 'Tidak Ada'),
+('PR-0002', 'Akhir Tahun', '2017-10-01 00:00:00', '2017-12-31 00:00:00', '10', '');
 
 -- --------------------------------------------------------
 
@@ -490,7 +498,7 @@ ALTER TABLE `tamu`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- Constraints for dumped tables
 --

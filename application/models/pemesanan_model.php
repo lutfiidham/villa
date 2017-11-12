@@ -16,8 +16,13 @@ class Pemesanan_model extends CI_Model
     }
 
     function get_kamar(){
-        $q = $this->db->query("select id_kamar, concat(no_kamar,' - ',nama_kamar) as kamar from kamar where status_kamar = 'available' ");
+        $q = $this->db->query("select id_kamar, concat(no_kamar,' - ',nama_kamar) as kamar from kamar ");
         return $q; 
+    }
+
+    function get_promo_diskon($idx){
+        $q = $this->db->query("select diskon_promo from promo where id_promo = '$idx'");
+        return $q->result(); 
     }
 
     function get_harga($idk){
@@ -47,8 +52,9 @@ class Pemesanan_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->result();   
+        $sql = $this->db->query("select p.id_pemesanan, waktu_pemesanan, concat(nama_depan_tamu,' ',nama_belakang_tamu) as tamu, jumlah_dewasa, jumlah_anak, nama_channel, concat(plan_ci,' - ',plan_co) as lama_menginap, concat(nama_kamar,' / ',no_kamar) as kamar, concat(nama_promo,' ',diskon_promo) as promo, uang_muka, sisa_bayar, total_harga, permintaan_spesial, nama_status_pemesanan
+        from pemesanan p join check_in ci on p.id_pemesanan = ci.id_pemesanan join check_out co on co.id_pemesanan = p.id_pemesanan join tamu t on t.id_tamu = p.id_tamu join kamar k on k.id_kamar = p.id_kamar join promo pr on pr.id_promo = p.id_promo join status_pemesanan sp on sp.id_status_pemesanan = p.id_status_pemesanan join channel ch on ch.id_channel = p.id_channel");
+        return $sql->row();   
     }
     
     // get total rows

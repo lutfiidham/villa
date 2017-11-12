@@ -32,7 +32,8 @@ class Inventori extends CI_Controller
             $data = array(
 		'id_inventori' => $row->id_inventori,
 		'nama_inventori' => $row->nama_inventori,
-		'harga_inventori' => $row->harga_inventori,
+        'harga_inventori' => $row->harga_inventori,
+		'jumlah_inventori' => $row->jumlah_inventori,
 	    );
             $this->template->load('template','inventori_read', $data);
         } else {
@@ -48,7 +49,8 @@ class Inventori extends CI_Controller
             'action' => site_url('inventori/create_action'),
 	    'id_inventori' => set_value('id_inventori'),
 	    'nama_inventori' => set_value('nama_inventori'),
-	    'harga_inventori' => set_value('harga_inventori'),
+        'harga_inventori' => set_value('harga_inventori'),
+	    'jumlah_inventori' => set_value('jumlah_inventori'),
 	);
         $this->template->load('template','inventori_form', $data);
     }
@@ -63,7 +65,8 @@ class Inventori extends CI_Controller
             $data = array(
 		'id_inventori' => $this->input->post('id_inventori',TRUE),
 		'nama_inventori' => $this->input->post('nama_inventori',TRUE),
-		'harga_inventori' => $this->input->post('harga_inventori',TRUE),
+        'harga_inventori' => $this->input->post('harga_inventori',TRUE),
+		'jumlah_inventori' => $this->input->post('jumlah_inventori',TRUE),
 	    );
 
             $this->Inventori_model->insert($data);
@@ -82,7 +85,8 @@ class Inventori extends CI_Controller
                 'action' => site_url('inventori/update_action'),
 		'id_inventori' => set_value('id_inventori', $row->id_inventori),
 		'nama_inventori' => set_value('nama_inventori', $row->nama_inventori),
-		'harga_inventori' => set_value('harga_inventori', $row->harga_inventori),
+        'harga_inventori' => set_value('harga_inventori', $row->harga_inventori),
+		'jumlah_inventori' => set_value('jumlah_inventori', $row->harga_inventori),
 	    );
             $this->template->load('template','inventori_form', $data);
         } else {
@@ -101,7 +105,8 @@ class Inventori extends CI_Controller
             $data = array(
 		'id_inventori' => $this->input->post('id_inventori',TRUE),
 		'nama_inventori' => $this->input->post('nama_inventori',TRUE),
-		'harga_inventori' => $this->input->post('harga_inventori',TRUE),
+        'harga_inventori' => $this->input->post('harga_inventori',TRUE),
+		'jumlah_inventori' => $this->input->post('jumlah_inventori',TRUE),
 	    );
 
             $this->Inventori_model->update($this->input->post('id_inventori', TRUE), $data);
@@ -128,7 +133,8 @@ class Inventori extends CI_Controller
     {
 	$this->form_validation->set_rules('id_inventori', 'id inventori', 'trim|required');
 	$this->form_validation->set_rules('nama_inventori', 'nama inventori', 'trim|required');
-	$this->form_validation->set_rules('harga_inventori', 'harga inventori', 'trim|required');
+    $this->form_validation->set_rules('harga_inventori', 'harga inventori', 'trim|required');
+	$this->form_validation->set_rules('jumlah_inventori', 'jumlah inventori', 'trim|required');
 
 	$this->form_validation->set_rules('id_inventori', 'id_inventori', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
